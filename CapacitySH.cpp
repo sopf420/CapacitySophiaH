@@ -116,23 +116,18 @@ int main(int argc, char** argv) {
     length = stoi(argv[1]);
     width = stoi(argv[2]);
 
-    /*Capybaras sind unglaubliche Ingenieure, erst kürzlich haben sie einen Durchbruch bei der umwelt -
-    freundlichen Energie erlangt.Sie beschließen daher eine extra Stadt namens Capycity aufzubauen,
-        welche ihren Fokus auf die Erzeugung von Energie legt und somit umgebende Städte vollständig ver -
-        sorgen kann.
-        Aktuell sind sie in der Lage mithilfe folgender Technologien Energie zu erzeugen :
-    • Wasserkraftwerk
-        • Windkraftwerk
-        • Solarpanele*/
 
-    cout << "Hallo und Herzlich Willkommen in der Welt von CapyCity!"
-            <<"In diesem kleinen Spiel kannst du der Erbauer deiner eigenen Stadt werden!\n"
-            << "Die Idee dahinter stammt von erstaunlichen Ingeneuren,\n"
-            <<"welche einen grossen Schritt fuer umweltfreundliche Energie erreichten.\n"
-            << "\n"
-            <<"Da du die Welt bereits betreten hast, hast du den Umfang deiner Stadt bereits festgelegt auf " << argv[1] << "mal" << argv[2] <<".\n"
-            <<"Ich hoffe damit bist du zufrieden. Wenn ja, legen wir los!\n\n"
-            << "Was willst du als erstes tun?";
+    cout    <<" Hallo und Herzlich Willkommen in der Welt von CapyCity!\n"
+            <<" In diesem kleinen Spiel kannst du der Erbauer deiner eigenen Stadt werden!\n"
+            << " Die Idee dahinter stammt von erstaunlichen Ingeneuren,\n"
+            <<" welche einen grossen Schritt fuer umweltfreundliche Energieerzeugung erreichen wollten,\n"
+            << " denn Cpapacity ist keine normale City.\n"
+            << " Sie erfuellt nur den Zweck, Energie zu erzeugen und die Menschen damit zu versorgen!\n"
+            << " Mihilfe der Technologien der Windkraft, von Wasserwerken und Solapanels kannst du deine Stadt gestalten.\n"
+            << " Mal sehen was dein Ideenreichtum der Stadt Capacity bringt.\n\n"
+            <<" Da du die Welt bereits betreten hast, hast du den Umfang deiner Stadt bereits auf " << argv[1] << "mal" << argv[2] <<" festgelegt.\n"
+            <<" Ich hoffe damit bist du zufrieden. Wenn ja, legen wir los!\n\n"
+            << " Was willst du als erstes tun?\n";
      
     Area = new Gebaeude * *[length];
     for (int x = 0; x < length; x++) {
@@ -164,7 +159,7 @@ public:
         for (int i = startX; i < startX + breite; i++) {
             for (int j = startY; j < startY + laenge; j++) {
                 if ((startX + breite) > width || (startY + laenge) > length || Area[j][i] != nullptr) {
-                    cout << "Diese Flaeche ist bereits belegt oder ist ausserhalb des Baubereichs!\n\n";
+                    cout << "Die gewaehlte Flaeche ist bereits besetzt oder ist ausserhalb deines Baubereichs!\n\n";
                     return gebaeudeBau();
                 }
                 else {
@@ -202,19 +197,7 @@ public:
         }
     }
 
-    int bauWidth() {
-        string breite;
-
-        cout << "Wie breit soll denn die Flaeche werden?: \n";
-        cin >> breite;
-        if (regex_match(breite, numberCheck) && stoi(breite) > 0 && stoi(breite) <= width) {
-            return stoi(breite);
-        }
-        else {
-            cout << "Die Breite muss zwischen 1 und " << width << " liegen!\n";
-            return bauWidth();
-        }
-    }
+  
 
     int bauenLength() {
         string laenge;
@@ -230,6 +213,19 @@ public:
         }
     }
 
+    int bauWidth() {
+        string breite;
+
+        cout << "Wie breit soll denn die Flaeche werden?: \n";
+        cin >> breite;
+        if (regex_match(breite, numberCheck) && stoi(breite) > 0 && stoi(breite) <= width) {
+            return stoi(breite);
+        }
+        else {
+            cout << "Die Breite muss zwischen 1 und " << width << " liegen!\n";
+            return bauWidth();
+        }
+    }
     void buildingPlan() {
         int w = 0;
         int i = 0;
@@ -261,8 +257,8 @@ public:
 
         cout << endl
             << w << " Wassserkraftwerke\n"
-            << "Ein einzelnes Wasserkraftwerk kostet: " << WasserPlatzieren().getPrice() << "$\n"
-            << "Fuer die Wasserkraftwerke werden benoetigt: ";
+            << "Ein Platz fuer ein Wasserkraftwerk kostet: " << WasserPlatzieren().getPrice() << "$\n"
+            << "Um dein Wasserwerk zu bauen brauchst du: ";
 
         for (auto& whichMat : WasserPlatzieren().materials) {
             cout << "[" << w * whichMat.second << " " << whichMat.first.getName() << "] ";
@@ -270,7 +266,7 @@ public:
         }
 
         cout << endl
-            << "Die Gesamtkosten der Wasserkraftwerke betragen:  "
+            << "Deine Wasserkraftwerke Kosten insgesamt:  "
             << w * (WasserPlatzieren().getPrice() + matCost) << "$\n";
 
 
@@ -280,7 +276,7 @@ public:
         cout << endl
             << i << " Windkraftwerke\n"
             << "Ein einzelnes Windkraftwerk kostet: " << WindPlatzieren().getPrice() << "$\n"
-            << "Fuer die Windkraftwerk werden benoetigt: ";
+            << "Um dein Windkraftwerk zu bauen brauchst du: ";
 
         for (auto& whichMat : WindPlatzieren().materials) {
             cout << "[" << i * whichMat.second << " " << whichMat.first.getName() << "] ";
@@ -288,7 +284,7 @@ public:
         }
 
         cout << endl
-            << "Die Gesamtkosten der Wasserkraftwerke betragen:  "
+            << "Deine Windkraftwerke Kosten insgesamt:  "
             << i * (WindPlatzieren().getPrice() + matCost) << "$\n";
 
         // Solarpanel
@@ -297,7 +293,7 @@ public:
         cout << endl
             << s << " Solarpanel\n"
             << "Ein einzelnes Solarpanel kostet: " << SolarPlatzieren().getPrice() << "$\n"
-            << "Fuer die Solarpanel werden benoetigt: ";
+            << "Um dein Solapanel zu bauen brauchst du: ";
 
         for (auto& whichMat : SolarPlatzieren().materials) {
             cout << "[" << s * whichMat.second << " " << whichMat.first.getName() << "] ";
@@ -305,7 +301,7 @@ public:
         }
 
         cout << endl
-            << "Die Gesamtkosten der Wasserkraftwerke betragen:  "
+            << "Deine Solarpanel Kosten insgesamt:  "
             << s * (SolarPlatzieren().getPrice() + matCost) << "$\n";
 
         menu();
@@ -326,16 +322,50 @@ public:
     }
 };
 
+
+Gebaeude* buildingMenu() {
+    string auswahlBau;
+
+    cout << "Was für ein Gebaeude willst du denn bauen?";
+
+    cout << endl
+        << "1: Ein Wasserkraftwerk\n"
+        << "2: Ein Windkraftwerk\n"
+        << "3: Ein Solarpanel\n"
+        << "4: Zurueck zum Hauptmenue\n";
+    cin >> auswahlBau;
+
+    if (regex_match(auswahlBau, checkMenu)) {
+        switch (stoi(auswahlBau)) {
+        case 1:
+            return new WasserPlatzieren();
+            break;
+        case 2:
+            return new WindPlatzieren();
+            break;
+        case 3:
+            return new SolarPlatzieren();
+            break;
+        default:
+            return nullptr;
+        }
+    }
+    else {
+        cout << "Scherzkeks. Bitte eine Zahl von 1 bis 4:\n";
+        return buildingMenu();
+    }
+}
+
 void menu() {
     string choice;
 
     CapycitySim CapycitySim;
 
     cout << endl
-        << "1 - Gebaeude setzen\n"
-        << "2 - Bereich loeschen\n"
-        << "3 - Aktueller Bauplan\n"
-        << "4 - Exit\n";
+        << "1: Ein Gebaeude erstellen!\n"
+        << "2: Gebaeude loeschen.\n"
+        << "3: Aktueller Lageplan\n"
+        << "4: Beenden\n";
 
     cin >> choice;
 
@@ -355,45 +385,12 @@ void menu() {
             break;
         case 4:
             //Beenden des Programms
-            cout << "Bye Bye";
+            cout << "Auf Wiedersehen und bis bald!";
             exit(0);
         }
     }
     else {
-        cout << "Nur Zahlen von 1 - 4 erlaubt!\n";
+        cout << "Scherzkeks. Bitte eine Zahl von 1 bis 4:\n";
         menu();
-    }
-}
-
-Gebaeude* buildingMenu() {
-    string auswahlBau;
-
-    cout << "Was für ein Gebaeude willst du denn bauen?";
-
-    cout << endl
-        << "1 - Das Wasserkraftwerk\n"
-        << "2 - Das Windkraftwerk\n"
-        << "3 - Die Solarpanele\n"
-        << "4 - Zurueck zum Hauptmenue\n";
-    cin >> auswahlBau;
-
-    if (regex_match(auswahlBau, checkMenu)) {
-        switch (stoi(auswahlBau)) {
-        case 1:
-            return new WasserPlatzieren();
-            break;
-        case 2:
-            return new WindPlatzieren();
-            break;
-        case 3:
-            return new SolarPlatzieren();
-            break;
-        default:
-            return nullptr;
-        }
-    }
-    else {
-        cout << "Nur Zahlen von 1 - 4 erlaubt!\n";
-        return buildingMenu();
     }
 }
