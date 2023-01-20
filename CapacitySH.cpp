@@ -10,7 +10,7 @@ int width;
 
 regex checkMenu("[1-4]");
 regex numberCheck("[[:digit:]]+");
-
+ 
 void menu();
 
 
