@@ -133,7 +133,7 @@ int main(int argc, char** argv) {
             <<"Da du die Welt bereits betreten hast, hast du den Umfang deiner Stadt bereits festgelegt auf " << argv[1] << "mal" << argv[2] <<".\n"
             <<"Ich hoffe damit bist du zufrieden. Wenn ja, legen wir los!\n\n"
             << "Was willst du als erstes tun?";
-
+     
     Area = new Gebaeude * *[length];
     for (int x = 0; x < length; x++) {
         Area[x] = new Gebaeude * [width];
